@@ -18,5 +18,5 @@
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 
 #git clone https://github.com/chsalan/openwrt-k3 package/alan
-git clone https://github.com/lwz322/k3screenctrl_build package/alan
-git clone https://github.com/lwz322/luci-app-k3screenctrl package/alan
+#git clone https://github.com/lwz322/k3screenctrl_build package/alan
+#git clone https://github.com/lwz322/luci-app-k3screenctrl package/alan
