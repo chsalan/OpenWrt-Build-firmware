@@ -59,7 +59,7 @@ jobs:
       with:
         repository: chsalan/openwrt-k3-package
         ref: main
-        TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        repo_token: ${{ secrets.PERSONAL_TOKEN }}
       
     - name: Clone source code
       working-directory: /workdir
