@@ -54,13 +54,6 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-     
-    - name: Clone source code
-      working-directory: /workdir
-      run: |
-        df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Get private repo - packages
       uses: actions/checkout@main
@@ -68,8 +61,16 @@ jobs:
         repository: ${{ env.PACKAGE_REPO }}
         ref: main
         token: ${{ secrets.PAT }}
-        path: /workdir/openwrt/package/alan
-        
+        path: alan
+
+    - name: Clone source code
+      working-directory: /workdir
+      run: |
+        df -hT $PWD
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        mv $GITHUB_WORKSPACE/alan $GITHUB_WORKSPACE/openwrt/package/
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+
     - name: Load custom feeds
       env:
         token: ${{ secrets.PERSONAL_TOKEN }}
