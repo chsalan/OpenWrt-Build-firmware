@@ -21,7 +21,7 @@ on:
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: openwrt-21.02
+  REPO_BRANCH: v21.02.3 --depth=1
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: k3-xu.config
   DIY_P1_SH: diy-part1.sh
@@ -53,6 +53,13 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
+     
+    - name: Clone source code
+      working-directory: /workdir
+      run: |
+        df -hT $PWD
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Get private repo
       uses: actions/checkout@main
@@ -60,15 +67,8 @@ jobs:
         repository: chsalan/openwrt-k3-package
         ref: main
         token: ${{ secrets.PAT }}
-        path: alan
-      
-    - name: Clone source code
-      working-directory: /workdir
-      run: |
-        df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-   
+        path: $GITHUB_WORKSPACE/openwrt/package/alan
+        
     - name: Load custom feeds
       env:
         token: ${{ secrets.PERSONAL_TOKEN }}
