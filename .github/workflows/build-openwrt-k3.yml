@@ -61,7 +61,7 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-    - name: Get private repo
+    - name: Get private repo - alan's package
       uses: actions/checkout@main
       with:
         repository: chsalan/openwrt-k3-package
