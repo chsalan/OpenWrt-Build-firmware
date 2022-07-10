@@ -24,7 +24,7 @@ env:
   REPO_BRANCH: v21.02.3 --depth=1
   PACKAGE_REPO: chsalan/OpenWrt-Packages
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: k3-xu.config
+  CONFIG_FILE: x86-xu.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
@@ -69,7 +69,6 @@ jobs:
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         mv $GITHUB_WORKSPACE/alan /workdir/openwrt/package/
-        sed -i 's|^TARGET_|# TARGET_|g; s|# TARGET_DEVICES += phicomm_k3|TARGET_DEVICES += phicomm_k3|' /workdir/openwrt/target/linux/bcm53xx/image/Makefile
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Load custom feeds
