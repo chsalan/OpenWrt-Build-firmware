@@ -22,6 +22,7 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: v21.02.3 --depth=1
+  PACKAGE_REPO: chsalan/openwrt-k3-package
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: k3-xu.config
   DIY_P1_SH: diy-part1.sh
@@ -61,13 +62,13 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-    - name: Get private repo - alan's package
+    - name: Get private repo - packages
       uses: actions/checkout@main
       with:
-        repository: chsalan/openwrt-k3-package
+        repository: $PACKAGE_REPO
         ref: main
         token: ${{ secrets.PAT }}
-        path: $GITHUB_WORKSPACE/openwrt/package/alan
+        path: /workdir/openwrt/package/alan
         
     - name: Load custom feeds
       env:
