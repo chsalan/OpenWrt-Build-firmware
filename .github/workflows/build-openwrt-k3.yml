@@ -65,7 +65,7 @@ jobs:
     - name: Get private repo - packages
       uses: actions/checkout@main
       with:
-        repository: ${{ PACKAGE_REPO }}
+        repository: ${{ env.PACKAGE_REPO }}
         ref: main
         token: ${{ secrets.PAT }}
         path: /workdir/openwrt/package/alan
