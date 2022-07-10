@@ -69,6 +69,7 @@ jobs:
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         mv $GITHUB_WORKSPACE/alan /workdir/openwrt/package/
+        sed -i 's|^TARGET_|# TARGET_|g; s|# TARGET_DEVICES += phicomm_k3|TARGET_DEVICES += phicomm_k3|' /workdir/openwrt/target/linux/bcm53xx/image/Makefile
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Load custom feeds
