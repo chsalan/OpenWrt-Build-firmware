@@ -90,8 +90,8 @@ jobs:
 
     - name: Load custom configuration
       run: |
-        [ -e files ] && mv $GITHUB_WORKSPACE/alan/files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $GITHUB_WORKSPACE/alan/$CONFIG_FILE openwrt/.config
+        [ -d /workdir/openwrt/package/alan/files ] && mv /workdir/openwrt/package/alan/files openwrt/files
+        [ -e /workdir/openwrt/package/alan/$CONFIG_FILE ] && mv /workdir/openwrt/package/alan/$CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH

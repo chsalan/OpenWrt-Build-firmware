@@ -21,7 +21,7 @@ on:
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: v21.02.3 --depth=1
+  REPO_BRANCH: v21.02.1 --depth=1
   PACKAGE_REPO: chsalan/OpenWrt-Packages
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: k3-lt.config
@@ -90,8 +90,8 @@ jobs:
 
     - name: Load custom configuration
       run: |
-        [ -e files ] && mv $GITHUB_WORKSPACE/alan/files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $GITHUB_WORKSPACE/alan/$CONFIG_FILE openwrt/.config
+        [ -d /workdir/openwrt/package/alan/files ] && mv /workdir/openwrt/package/alan/files openwrt/files
+        [ -e /workdir/openwrt/package/alan/$CONFIG_FILE ] && mv /workdir/openwrt/package/alan/$CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
