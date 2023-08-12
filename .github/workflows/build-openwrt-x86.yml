@@ -21,7 +21,7 @@ on:
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: v21.02.3 --depth=1
+  REPO_BRANCH: v21.02.7 --depth=1
   PACKAGE_REPO: chsalan/OpenWrt-Packages
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: x86-xu.config
