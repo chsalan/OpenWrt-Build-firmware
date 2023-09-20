@@ -23,9 +23,9 @@ include:
   - jobs.yml
 
 jobs:
-  # preinit:
-  #   steps:
-  #     - name: Print GitHub Actions version
-  #       run: echo "GitHub Actions version: ${{ github.action_version }}"
+  preinit:
+    steps:
+      - name: Print GitHub Actions version
+        run: echo "GitHub Actions version: ${{ github.action_version }}"
   build:
     extends: common.build
