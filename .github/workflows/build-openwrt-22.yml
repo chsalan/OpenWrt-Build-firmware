@@ -66,9 +66,9 @@ jobs:
         echo "REPO_BRANCH=${{ github.event.inputs.REPO_BRANCH }}" >> $GITHUB_ENV
         echo "CONFIG_FILE=${{ github.event.inputs.CONFIG_FILE }}" >> $GITHUB_ENV
         ################################
-        echo "REPO_URL=$REPO_URL"
-        echo "REPO_BRANCH=$REPO_BRANCH"
-        echo "CONFIG_FILE=$CONFIG_FILE"
+        echo "REPO_URL: $REPO_URL"
+        echo "REPO_BRANCH: $REPO_BRANCH"
+        echo "CONFIG_FILE: $CONFIG_FILE"
         ################################
 
     - name: Checkout
