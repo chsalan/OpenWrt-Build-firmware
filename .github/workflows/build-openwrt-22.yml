@@ -73,9 +73,12 @@ jobs:
         echo "REPO_BRANCH: $REPO_BRANCH"
         echo "CONFIG_FILE: $CONFIG_FILE"
         echo "test_tag=${{ env.REPO_BRANCH }}-${{ env.CONFIG_FILE }}-$(date +"%Y.%m.%d-%H%M")"  >> "$GITHUB_OUTPUT"
+        echo "tag=openwrt-${{ env.REPO_BRANCH }}-${{ env.CONFIG_FILE }}-$(date +"%Y.%m.%d-%H%M")"  >> "$GITHUB_OUTPUT"
         echo "################################################"
     - name: test
-      run: echo ${{ steps.test.outputs.release_tag }}
+      run: | 
+        echo ${{ steps.test.outputs.test_tag }}
+        echo ${{ steps.test.outputs.tag }}
 
     - name: Checkout
       uses: actions/checkout@main
