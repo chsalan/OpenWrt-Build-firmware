@@ -9,7 +9,7 @@
 #
 
 # 定义：工作流名称
-name: Build OpenWrt - 22 - x86
+name: Build OpenWrt - 22
 
 # on:
 #   label:
@@ -33,10 +33,10 @@ name: Build OpenWrt - 22 - x86
 
 env:
   # 定义：配置文件
-  CONFIG_FILE: 22-x86-xu.config
+  # CONFIG_FILE: 22-x86-xu.config
   # 定义：openwrt的分支
-  REPO_BRANCH: v22.03.5 --depth=1
-  REPO_URL: https://github.com/openwrt/openwrt
+  # REPO_BRANCH: v22.03.5 --depth=1
+  # REPO_URL: https://github.com/openwrt/openwrt
   PACKAGE_REPO: chsalan/OpenWrt-Packages
   FEEDS_CONF: feeds.conf.default
   DIY_P1_SH: diy-part1.sh
@@ -57,18 +57,25 @@ on:
       #   description: 'SSH connection to Actions'
       #   required: true
       #   default: 'false'
-      openwrt:
+      REPO_URL:
         description: 'OpenWrt url'
         required: true
-        default: ${{ env.REPO_URL }}
-      branch:
+        type: string
+        default: 'https://github.com/openwrt/openwrt'
+      REPO_BRANCH:
         description: 'OpenWrt branch'
         required: true
-        default: ${{ env.REPO_BRANCH }}
-      config:
+        type: string
+        default: 'v22.03.5'
+      CONFIG_FILE:
         description: 'Config file'
         required: true
-        default: ${{ env.CONFIG_FILE }}
+        type: choice
+        default: '22-x86-xu.config'
+        options:
+          - 22-x86-xu.config
+          - 22-k3-lt.config
+          - 22-k3-tt.config
 
 # 编译
 jobs:
@@ -76,6 +83,12 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+
+    - name: Set environment variable
+      run: echo "REPO_URL=${{ github.event.inputs.REPO_URL }}" >> $GITHUB_ENV
+      run: echo "REPO_BRANCH=${{ github.event.inputs.REPO_BRANCH }}" >> $GITHUB_ENV
+      run: echo "CONFIG_FILE=${{ github.event.inputs.CONFIG_FILE }}" >> $GITHUB_ENV
+
     - name: Checkout
       uses: actions/checkout@main
 
@@ -104,7 +117,7 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        git clone $REPO_URL -b $REPO_BRANCH --depth=1 openwrt
         mv $GITHUB_WORKSPACE/alan /workdir/openwrt/package/
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
