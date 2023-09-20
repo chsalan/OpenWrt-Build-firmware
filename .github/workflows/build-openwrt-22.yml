@@ -65,6 +65,13 @@ jobs:
         echo "REPO_URL=${{ github.event.inputs.REPO_URL }}" >> $GITHUB_ENV
         echo "REPO_BRANCH=${{ github.event.inputs.REPO_BRANCH }}" >> $GITHUB_ENV
         echo "CONFIG_FILE=${{ github.event.inputs.CONFIG_FILE }}" >> $GITHUB_ENV
+    - name: OpenWrt build config
+      run: |
+        ################################
+        echo "REPO_URL: $REPO_URL"
+        echo "REPO_BRANCH: $REPO_BRANCH"
+        echo "CONFIG_FILE: $CONFIG_FILE"
+        ################################
 
     - name: Checkout
       uses: actions/checkout@main
@@ -73,11 +80,6 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        ################################
-        echo "REPO_URL: $REPO_URL"
-        echo "REPO_BRANCH: $REPO_BRANCH"
-        echo "CONFIG_FILE: $CONFIG_FILE"
-        ################################
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
         sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-2004)
