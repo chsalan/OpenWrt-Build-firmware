@@ -72,7 +72,7 @@ jobs:
         echo "REPO_URL: $REPO_URL"
         echo "REPO_BRANCH: $REPO_BRANCH"
         echo "CONFIG_FILE: $CONFIG_FILE"
-        echo "test_tag=$(REPO_BRANCH)-$(CONFIG-FILE)-$(date +"%Y.%m.%d-%H%M")"  >> "$GITHUB_OUTPUT"
+        echo "test_tag=$(REPO_BRANCH)-$(CONFIG_FILE)-$(date +"%Y.%m.%d-%H%M")"  >> "$GITHUB_OUTPUT"
         echo "################################################"
     - name: test
       run: echo ${{ steps.test.outputs.release_tag }}
@@ -217,7 +217,7 @@ jobs:
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
         # echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
-        echo "release_tag=$(REPO_BRANCH)-$(CONFIG-FILE)-$(date +"%Y.%m.%d-%H%M")"  >> "$GITHUB_OUTPUT"
+        echo "release_tag=$(REPO_BRANCH)-$(CONFIG_FILE)-$(date +"%Y.%m.%d-%H%M")"  >> "$GITHUB_OUTPUT"
         touch release.txt
         [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
