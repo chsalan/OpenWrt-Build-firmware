@@ -233,7 +233,7 @@ jobs:
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
         # echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
-        echo "RELEASE_TAG=$(date +"%Y.%m.%d-%H%M")"  >> $GITHUB_OUTPUT
+        echo "RELEASE_TAG=$(REPO_BRANCH)-$(CONFIG-FILE)-$(date +"%Y.%m.%d-%H%M")"  >> $GITHUB_OUTPUT
         touch release.txt
         # [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ env.COW_URL }})" >> release.txt
