@@ -8,33 +8,10 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-# 定义：工作流名称
 name: Build OpenWrt - 22
 
-# on:
-#   label:
-#     types:
-#       - created
-
-# env:
-#   REPO_BRANCH: v22.03.5 --depth=1
-#   CONFIG_FILE: 22-x86-xu.config
-
-# include:
-#   - jobs.yml
-
-# jobs:
-#   preinit:
-#     steps:
-#       - name: Print GitHub Actions version
-#         run: echo "GitHub Actions version: ${{ github.action_version }}"
-#   build:
-#     extends: common.build
-
 env:
-  # 定义：配置文件
   # CONFIG_FILE: 22-x86-xu.config
-  # 定义：openwrt的分支
   # REPO_BRANCH: v22.03.5 --depth=1
   # REPO_URL: https://github.com/openwrt/openwrt
   PACKAGE_REPO: chsalan/OpenWrt-Packages
@@ -48,7 +25,6 @@ env:
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
-# 触发条件
 on:
   repository_dispatch:
   workflow_dispatch:
