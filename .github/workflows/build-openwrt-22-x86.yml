@@ -30,7 +30,7 @@ jobs:
   hello:
     name: Say hello
     runs-on: ubuntu-20.04
-    if: github.ref != 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Print a greeting
         run: echo "Hello, world!"
