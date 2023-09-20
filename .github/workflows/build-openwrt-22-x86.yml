@@ -53,10 +53,22 @@ on:
   repository_dispatch:
   workflow_dispatch:
     inputs:
-      ssh:
-        description: 'SSH connection to Actions'
+      # ssh:
+      #   description: 'SSH connection to Actions'
+      #   required: true
+      #   default: 'false'
+      openwrt:
+        description: 'OpenWrt url'
         required: true
-        default: 'false'
+        default: ${{ env.REPO_URL }}
+      branch:
+        description: 'OpenWrt branch'
+        required: true
+        default: ${{ env.REPO_BRANCH }}
+      config:
+        description: 'Config file'
+        required: true
+        default: ${{ env.CONFIG_FILE }}
 
 # 编译
 jobs:
