@@ -8,29 +8,24 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-include:
-  - jobs.yml
-
 name: Build OpenWrt - 22 - x86
+
+on:
+  label:
+    types:
+      - created
 
 env:
   REPO_BRANCH: v22.03.5 --depth=1
   CONFIG_FILE: 22-x86-xu.config
 
-on:
-  repository_dispatch:
-  workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: true
-        default: 'false'
+include:
+  - jobs.yml
 
 jobs:
-  hello:
-    name: Say hello
-    runs-on: ubuntu-20.04
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Print a greeting
-        run: echo "Hello, world!"
+  # preinit:
+  #   steps:
+  #     - name: Print GitHub Actions version
+  #       run: echo "GitHub Actions version: ${{ github.action_version }}"
+  build:
+    extends: common.build
