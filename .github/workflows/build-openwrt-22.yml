@@ -72,6 +72,10 @@ jobs:
         echo "REPO_BRANCH: $REPO_BRANCH"
         echo "CONFIG_FILE: $CONFIG_FILE"
         echo "TAG_PREFIX: $REPO_BRANCH-$(echo $CONFIG_FILE | sed -e "s/^[^-]*-//" -e "s/.config//")-$(date +"%Y.%m.%d")"
+        echo "--------------cpu--------------"
+        cat /proc/cpuinfo
+        echo "--------------mem--------------"
+        free -m
         echo "################################################"
 
 
