@@ -72,13 +72,15 @@ jobs:
         echo "REPO_URL: $REPO_URL"
         echo "REPO_BRANCH: $REPO_BRANCH"
         echo "CONFIG_FILE: $CONFIG_FILE"
-        echo "test_tag=${{ env.REPO_BRANCH }}-${{ env.CONFIG_FILE }}-$(date +"%Y.%m.%d-%H%M")"  >> "$GITHUB_OUTPUT"
-        echo "tag=openwrt-${{ env.REPO_BRANCH }}-${{ env.CONFIG_FILE }}-$(date +"%Y.%m.%d-%H%M")"  >> "$GITHUB_OUTPUT"
+        echo "TAG_SUFFIX=$(echo $CONFIG_FILE | sed -e "s/^[^-]*-//" -e "s/.config//")" >> "$GITHUB_OUTPUT"
+        echo "test_tag=${{ env.REPO_BRANCH }}-${{ env.CONFIG_FILE }}-$(date +"%Y%m%d-%H%M")"  >> "$GITHUB_OUTPUT"
+        echo "tag=openwrt-$REPO_BRANCH-$CONFIG_FILE-$(date +"%Y.%m.%d-%H%M")"  >> "$GITHUB_OUTPUT"
         echo "################################################"
     - name: test
       run: | 
         echo ${{ steps.test.outputs.test_tag }}
         echo ${{ steps.test.outputs.tag }}
+        echo ${{ steps.test.outputs.TAG_SUFFIX }}
 
     - name: Checkout
       uses: actions/checkout@main
