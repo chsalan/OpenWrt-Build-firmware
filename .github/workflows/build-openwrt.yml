@@ -174,7 +174,7 @@ jobs:
       uses: actions/upload-artifact@main      
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: OpenWrt_bin${{ env.DEVICE_NAME }}_${{ env.CONFIG_FILE }}_${{ env.FILE_DATE }}
         path: openwrt/bin
 
     - name: Organize files
@@ -248,7 +248,7 @@ jobs:
       uses: dev-drprasad/delete-older-releases@v0.2.1
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
-        keep_latest: 30
+        keep_latest: 10
         delete_tags: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
